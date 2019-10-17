@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
      check if the children are done, if they're not done, keep on looping until they are
      once they are done, print the total numbers and
      */
-    while (true) {
+    while (1) {
         sem_getvalue(&sema, &semaValue);
         
         if (semaValue == 0) {
@@ -166,9 +166,9 @@ void *childFunc(void *ptr) {
     
     /* do all of our race-condition operations in the semaphore lock*/
     sem_wait(&semaLock);
-    numLines += info[i].numLines;
-    numChars += info[i].numChars;
-    numWords += info[i].numWords;
+    numLines += info[myIndex].numLines;
+    numChars += info[myIndex].numChars;
+    numWords += info[myIndex].numWords;
     sem_post(&semaLock);
     
     /* */
